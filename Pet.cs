@@ -49,5 +49,7 @@ namespace template_csharp_virtual_pet
             Boredom += 5;
             Health -= 5;
 	    }
+
+      
     }
 }
