@@ -19,6 +19,7 @@ while (isRunning)
    
     Console.WriteLine($"Great! Your first pet is a {activePet.Species} and its name is {activePet.Name}. Currently it has {activePet.Health} health, {activePet.Boredom} boredom, and a hunger level of {activePet.Hunger}!\n");
     Console.WriteLine($"You can take {activePet.Name} to the doctor to increase health, feed {activePet.Name} to decrease their hunger level, or play with {activePet.Name} to decrease their boredom!\nSelect from the options below to continue!\n");
+    pets.Add(activePet);
     Console.WriteLine("1. Feed\n2. Play\n3. See Doctor!\n4. See the status of your pet!\nPress Q to Quit!");
     activePet.Tick();
 
@@ -50,7 +51,7 @@ while (isRunning)
         case "4":
             Console.Clear();
             Console.WriteLine($"Your {activePet.Species}, {activePet.Name} has a hunger level of {activePet.Hunger}, a boredom level of {activePet.Boredom} and a health level of {activePet.Health}!");
-            if (activePet.Hunger > 75)
+            if (activePet.Hunger > 60)
             {
                 Console.WriteLine($"You better feed {activePet.Name}, they are hungry!");
 	        }
@@ -58,11 +59,12 @@ while (isRunning)
             {
                 Console.WriteLine($"You better take {activePet.Name} to see the doctor!");
 	        }
-            if (activePet.Boredom > 75)
+            if (activePet.Boredom > 60)
             {
                 Console.WriteLine($"{activePet.Name} is getting bored. You should play with them!");
 	        }
             Console.WriteLine("\nPress enter to return!");
+            activePet.Tick();
             Console.ReadLine();
             break;
         case "q":
@@ -71,4 +73,3 @@ while (isRunning)
             break;
     }
 }
-
