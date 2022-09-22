@@ -44,7 +44,14 @@ namespace template_csharp_virtual_pet
             return new Pet(names[rng.Next(names.Count)], species[rng.Next(species.Count)], 60, 60, 60);
         }
 
-
+        public void Display()
+        {
+            Console.WriteLine($"Name: {Name}, Species: {Species}, Health: {Health}, Boredom: {Boredom}, Hunger: {Hunger}");
+	    }
+        public string ToStringRepresentation()
+        {
+            return $"Name: {Name}, Species: {Species}, Health: {Health}, Boredom: {Boredom}, Hunger: {Hunger}";
+        }
 
         public void Feed()
         {
