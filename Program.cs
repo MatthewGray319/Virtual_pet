@@ -4,7 +4,7 @@ using template_csharp_virtual_pet;
 
 Console.WriteLine("Welcome to Virtual Pet!");
 
-var pets = new List<Pet>();
+var pets = new List<GamePets>();
 Pet activePet = new Pet();
 Console.WriteLine("Start by creating your first pet!");
 Console.WriteLine("What is your pet's name?");
@@ -44,7 +44,10 @@ while (isRunning)
             break;
         case "3":
             Console.Clear();
-            activePet.Tick();
+            foreach (GamePets pet in pets)
+            {
+                pet.Tick();
+	        }
             activePet.SeeDoctor();
             Console.WriteLine($"Thanks for taking {activePet.Name} to the doctor! Their health has increased but they have gotten more hungry and more bored!\n");
             Console.WriteLine("Press enter to return!");
@@ -66,7 +69,10 @@ while (isRunning)
                 Console.WriteLine($"{activePet.Name} is getting bored. You should play with them!");
 	        }
             Console.WriteLine("\nPress enter to return!");
-            activePet.Tick();
+            foreach (GamePets pet in pets)
+            {
+                pet.Tick();
+	        }
             Console.ReadLine();
             break;
         case "5":
@@ -78,23 +84,49 @@ while (isRunning)
                 case "1":
                     Console.Clear();
                     Pet toBuy = Pet.RandomPet();
-                    toBuy.Display();
-                    Console.WriteLine($"Would you like to adopt {toBuy.Name}? (Y/N)");
-                    var response = Console.ReadLine().ToLower();
-                    if (response == "y")
+                    RoboPets toBuyRobo = RoboPets.RandomRobo();
+                    Console.WriteLine("Would you like a robotic pet or an organic pet?\n1. Organic\n2. Robo");
+                    var petChoice = Console.ReadLine();
+                    switch (petChoice)
                     {
-                        Console.WriteLine($"Congrats! {toBuy.Name} is now your new pet!");
-                        pets.Add(toBuy);
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadKey();
-		            }
-                    else
-                    {
-                        Console.WriteLine("Thanks for coming, see you next time!");
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadKey();
-		            }
-                    break;
+                        case "1":
+                            toBuy.Display();
+                            Console.WriteLine($"Would you like to adopt {toBuy.Name}? (Y/N)");
+                            var response = Console.ReadLine().ToLower();
+                            if (response == "y")
+                            {
+                                Console.WriteLine($"Congrats! {toBuy.Name} is now your new pet!");
+                                pets.Add(toBuy);
+                                Console.WriteLine("Press enter to continue");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Thanks for coming, see you next time!");
+                                Console.WriteLine("Press enter to continue");
+                                Console.ReadKey();
+                            }
+                            break;
+                        case "2":
+                            toBuyRobo.Display();
+                            Console.WriteLine($"Would you like to adopt {toBuyRobo.Name}? (Y/N)");
+                            var response1 = Console.ReadLine().ToLower();
+                            if (response1 == "y")
+                            {
+                                Console.WriteLine($"Congrats! {toBuyRobo.Name} is now your new robotic pet!");
+                                pets.Add(toBuyRobo);
+                                Console.WriteLine("Press enter to continue.");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Thanks for coming, see you next time!");
+                                Console.WriteLine("Press enter to continue.");
+                                Console.ReadKey();
+                            }
+                            break;
+                    }
+                    break;      
                 case "2":
                     Console.Clear();
                     Console.WriteLine("What pet would you like to swap to?");
@@ -104,7 +136,7 @@ while (isRunning)
 
                     }
                     var swapPet = int.Parse(Console.ReadLine());
-                    activePet = pets[swapPet - 1];
+                    activePet = (Pet)(GamePets)pets[swapPet - 1];
                     Console.WriteLine($"Your new active pet is {activePet.Name} the {activePet.Species}");
                     Console.WriteLine("Press enter to continue");
                     Console.ReadKey();
@@ -122,7 +154,7 @@ while (isRunning)
                     {
                         case "1":
                             Console.Clear();
-                            foreach (Pet pet in pets)
+                            foreach (GamePets pet in pets)
                             {
                                 pet.Feed();
                             }
@@ -130,7 +162,7 @@ while (isRunning)
                             break;
                         case "2":
                             Console.Clear();
-                            foreach (Pet pet in pets)
+                            foreach (GamePets pet in pets)
                             {
                                 pet.SeeDoctor();
 			                }
@@ -138,13 +170,17 @@ while (isRunning)
                             break;
                         case "3":
                             Console.Clear();
-                            foreach (Pet pet in pets)
+                            foreach (GamePets pet in pets)
                             {
                                 pet.Play();
 			                }
                             Console.WriteLine("Thanks for playing with your pets! They are now less bored.");
                             break;
 			            
+		            }
+                    foreach (GamePets pet in pets)
+                    {
+                        pet.Tick();
 		            }
                     Console.WriteLine("\nPress Enter to return");
                     Console.ReadKey();
