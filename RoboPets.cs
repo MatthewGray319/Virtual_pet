@@ -4,11 +4,16 @@ namespace template_csharp_virtual_pet
     public class RoboPets : GamePets
     {
         public int Charge { get; set; }
+        
+
         public RoboPets()
         {
             Name = "Zakatron";
             Species = "Robot";
             Charge = 1000;
+            Boredom = 60;
+            Health = 100;
+            Hunger = 100;
         }
 
         public RoboPets(string name, string species, int charge)
@@ -33,11 +38,13 @@ namespace template_csharp_virtual_pet
         public override void Play()
         {
             Charge -= 100;
+            Boredom -= 15;
         }
 
         public override void SeeDoctor()
         {
             Charge += 200;
+            Health += 200;
         }
 
         public override void Tick()
@@ -47,12 +54,13 @@ namespace template_csharp_virtual_pet
 
         public void Display()
         {
-            Console.WriteLine($"Name: {Name}, Species: {Species}, Charge: {Charge}");
+            Console.WriteLine($"Name: {Name}, Species: {Species}, Charge: {Charge}, Boredom: {Boredom}, Health: {Health}");
         }
 
         public override void Feed()
         {
             Charge += 20;
+            Health += 25;
         }
     }
 }

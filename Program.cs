@@ -5,7 +5,8 @@ using template_csharp_virtual_pet;
 Console.WriteLine("Welcome to Virtual Pet!");
 
 var pets = new List<GamePets>();
-Pet activePet = new Pet();
+GamePets activePet;
+activePet = new Pet();
 Console.WriteLine("Start by creating your first pet!");
 Console.WriteLine("What is your pet's name?");
 activePet.Name = Console.ReadLine();
@@ -19,7 +20,7 @@ while (isRunning)
 {
 
    
-    Console.WriteLine($"Great! Your first pet is a {activePet.Species} and its name is {activePet.Name}. Currently it has {activePet.Health} health, {activePet.Boredom} boredom, and a hunger level of {activePet.Hunger}!\n");
+    Console.WriteLine($"Great! Your first pet is a {activePet.Species} and its name is {activePet.Name}!\n");
     Console.WriteLine($"You can take {activePet.Name} to the doctor to increase health, feed {activePet.Name} to decrease their hunger level, or play with {activePet.Name} to decrease their boredom!\nSelect from the options below to continue!\n");
    
     Console.WriteLine("1. Feed\n2. Play\n3. See Doctor!\n4. See the status of your pet!\n5. Visit the shelter!\nPress Q to Quit!");
@@ -31,7 +32,7 @@ while (isRunning)
         case "1":
             Console.Clear();
             activePet.Feed();
-            Console.WriteLine($"Thanks for feeding {activePet.Name}, his hunger is now {activePet.Hunger}!\n");
+            Console.WriteLine($"Thanks for feeding {activePet.Name}\n");
             Console.WriteLine("Press enter to return!");
             Console.ReadLine();
             break;
@@ -136,7 +137,7 @@ while (isRunning)
 
                     }
                     var swapPet = int.Parse(Console.ReadLine());
-                    activePet = (Pet)(GamePets)pets[swapPet - 1];
+                    activePet = pets[swapPet - 1];
                     Console.WriteLine($"Your new active pet is {activePet.Name} the {activePet.Species}");
                     Console.WriteLine("Press enter to continue");
                     Console.ReadKey();
@@ -145,8 +146,15 @@ while (isRunning)
                     Console.Clear();
                     Console.WriteLine("Here are all of your pets and their current status.\nYou can also choose to interact with all pets at once!");
                     for (int i = 0; i < pets.Count; i++)
-                    { 
-		                Console.WriteLine($"Pet # {i+1}\n {pets[i].ToStringRepresentation()}");
+                    {
+                        if(pets[i].GetType() == typeof(Pet)) 
+			            { 
+			                Console.WriteLine($"Pet # {i+1}\n {pets[i].Name} the {pets[i].Species} (Organic)");			            
+			            }
+                        else if (pets[i].GetType() == typeof(RoboPets))
+                        { 
+			                Console.WriteLine($"Pet # {i+1}\n {pets[i].Name} the {pets[i].Species} (Robot)");
+			            }
 		            }
                     Console.WriteLine("1. Feed all pets\n2. Take all pets to the doctor\n3. Play with all pets!");
                     var allPetChoice = Console.ReadLine();

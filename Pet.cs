@@ -10,7 +10,6 @@ namespace template_csharp_virtual_pet
     public class Pet : GamePets
     {
         public int Hunger { get; set; }
-        public int Boredom { get; set; }
         public int Health { get; set; }
 
         public Pet()
@@ -73,6 +72,9 @@ namespace template_csharp_virtual_pet
             Health -= 5;
 	    }
 
-      
+        public static explicit operator Pet(RoboPets v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
