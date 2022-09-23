@@ -5,6 +5,9 @@ namespace template_csharp_virtual_pet
     {
         public string Name { get; set; }
         public string Species { get; set; }
+        public int Boredom { get; set; }
+        public int Health { get; set; }
+        public int Hunger { get; set; }
 
         public abstract string ToStringRepresentation();
         public abstract void Play();
